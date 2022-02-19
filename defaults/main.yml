@@ -1,0 +1,6 @@
+---
+install: true
+browser: chromium
+text:
+  font: DejaVu Sans Mono
+  size: 18

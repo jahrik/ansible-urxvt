@@ -1,0 +1,11 @@
+---
+- name: Install urxvt
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - rxvt-unicode
+    - urxvt-perls
+    - ttf-dejavu
+    - xsel

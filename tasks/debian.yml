@@ -1,0 +1,16 @@
+---
+- name: Update cache
+  become: true
+  package:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install urxvt
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - rxvt-unicode
+    - ttf-dejavu
+    - xsel
