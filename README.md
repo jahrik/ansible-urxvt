@@ -1,5 +1,7 @@
 # URXVT
 
+[![CICD](https://github.com/jahrik/ansible-urxvt/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-urxvt/actions/workflows/cicd.yml)
+
 Installs xrvt-unicode, plugins, and configured xresources.
 
 ## Requirements
