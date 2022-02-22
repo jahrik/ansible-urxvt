@@ -2,5 +2,5 @@
 install: true
 browser: chromium
 text:
-  font: DejaVu Sans Mono
+  font: DejaVuSansMono Nerd Font
   size: 18

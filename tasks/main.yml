@@ -12,35 +12,6 @@
     state: directory
   tags: [ 'urxvt' ]
 
-- name: download urxvt font-size plugin
-  become: false
-  get_url:
-    url: https://raw.githubusercontent.com/majutsushi/urxvt-font-size/master/font-size
-    dest: "~/.urxvt/ext/font-size"
-  tags: [ 'urxvt' ]
-
-  # TODO: Fix for Ubuntu
-  # urxvt-perls package is not available on Ubuntu like it is Arch
-  # Will have to grab the plugins directly, like font-size above
-- name: enable urxvt keyboard-select plugin
-  file:
-    src: /usr/lib/urxvt/perl/keyboard-select
-    dest: "~/.urxvt/ext/keyboard-select"
-    state: link
-  when: ansible_os_family == 'Archlinux'
-  tags: [ 'urxvt' ]
-
-  # TODO: Fix for Ubuntu
-  # urxvt-perls package is not available on Ubuntu like it is Arch
-  # Will have to grab the plugins directly, like font-size above
-- name: enable urxvt url-select plugin
-  file:
-    src: /usr/lib/urxvt/perl/url-select
-    dest: "~/.urxvt/ext/url-select"
-    state: link
-  when: ansible_os_family == 'Archlinux'
-  tags: [ 'urxvt' ]
-
 - name: generate urxvt config files
   become: false
   template:
@@ -52,4 +23,35 @@
     - dark.xresources
     - light.xresources
     - xresources
-  tags: [ 'i3' ]
+  tags: [ 'urxvt' ]
+
+- name: download urxvt font-size plugin
+  become: false
+  get_url:
+    url: https://raw.githubusercontent.com/majutsushi/urxvt-font-size/master/font-size
+    dest: "~/.urxvt/ext/font-size"
+  tags: [ 'urxvt' ]
+
+  # TODO: Fix for Ubuntu
+  # urxvt-perls package is not available on Ubuntu like it is Arch
+  # Will have to grab the plugins directly, like font-size above
+- name: enable urxvt keyboard-select plugin
+  become: false
+  file:
+    src: /usr/lib/urxvt/perl/keyboard-select
+    dest: "~/.urxvt/ext/keyboard-select"
+    state: link
+  when: ansible_os_family == 'Archlinux'
+  tags: [ 'urxvt' ]
+
+  # TODO: Fix for Ubuntu
+  # urxvt-perls package is not available on Ubuntu like it is Arch
+  # Will have to grab the plugins directly, like font-size above
+- name: enable urxvt url-select plugin
+  become: false
+  file:
+    src: /usr/lib/urxvt/perl/url-select
+    dest: "~/.urxvt/ext/url-select"
+    state: link
+  when: ansible_os_family == 'Archlinux'
+  tags: [ 'urxvt' ]
