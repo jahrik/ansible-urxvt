@@ -1,23 +1,25 @@
 ---
-- include_tasks: archlinux.yml
+- ansible.builtin.include_tasks: archlinux.yml
   when: ansible_os_family == 'Archlinux'
 
-- include_tasks: debian.yml
+- ansible.builtin.include_tasks: debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: create ~/.urxvt/ext/ dir
+- name: Create ~/.urxvt/ext/ dir
   become: false
-  file:
+  ansible.builtin.file:
     path: "~/.urxvt/ext/"
     state: directory
+    mode: '0755'
   tags: [ 'urxvt' ]
 
-- name: generate urxvt config files
+- name: Generate urxvt config files
   become: false
-  template:
+  ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: "~/.urxvt/{{ item }}"
-  with_items:
+    mode: '0644'
+  loop:
     - Xresources.dark
     - Xresources.light
     - dark.xresources
@@ -25,31 +27,26 @@
     - xresources
   tags: [ 'urxvt' ]
 
-- name: download urxvt font-size plugin
+- name: Download urxvt font-size plugin
   become: false
-  get_url:
+  ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/majutsushi/urxvt-font-size/master/font-size
     dest: "~/.urxvt/ext/font-size"
+    mode: '0644'
   tags: [ 'urxvt' ]
 
-  # TODO: Fix for Ubuntu
-  # urxvt-perls package is not available on Ubuntu like it is Arch
-  # Will have to grab the plugins directly, like font-size above
-- name: enable urxvt keyboard-select plugin
+- name: Enable urxvt keyboard-select plugin
   become: false
-  file:
+  ansible.builtin.file:
     src: /usr/lib/urxvt/perl/keyboard-select
     dest: "~/.urxvt/ext/keyboard-select"
     state: link
   when: ansible_os_family == 'Archlinux'
   tags: [ 'urxvt' ]
 
-  # TODO: Fix for Ubuntu
-  # urxvt-perls package is not available on Ubuntu like it is Arch
-  # Will have to grab the plugins directly, like font-size above
-- name: enable urxvt url-select plugin
+- name: Enable urxvt url-select plugin
   become: false
-  file:
+  ansible.builtin.file:
     src: /usr/lib/urxvt/perl/url-select
     dest: "~/.urxvt/ext/url-select"
     state: link
