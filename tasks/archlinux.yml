@@ -1,11 +1,10 @@
 ---
 - name: Install urxvt
   become: true
-  package:
-    name: "{{ item }}"
+  community.general.pacman:
+    name:
+      - rxvt-unicode
+      - urxvt-perls
+      - ttf-dejavu
+      - xsel
     state: present
-  with_items:
-    - rxvt-unicode
-    - urxvt-perls
-    - ttf-dejavu
-    - xsel
