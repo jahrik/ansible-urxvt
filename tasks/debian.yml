@@ -10,6 +10,6 @@
   ansible.builtin.package:
     name:
       - rxvt-unicode
-      - ttf-dejavu
+      - fonts-dejavu
       - xsel
     state: present
