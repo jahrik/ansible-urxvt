@@ -23,12 +23,29 @@
         that: urxvt_ext.stat.exists and urxvt_ext.stat.isdir
         fail_msg: "~/.urxvt/ext directory not found"
 
-    - name: Check xresources config
+    - name: Check xresources config files
       ansible.builtin.stat:
-        path: ~/.urxvt/xresources
-      register: urxvt_cfg
+        path: "~/.urxvt/{{ item }}"
+      register: urxvt_configs
+      loop:
+        - xresources
+        - Xresources.dark
+        - Xresources.light
+        - dark.xresources
+        - light.xresources
 
-    - name: Assert xresources exists
+    - name: Assert all xresources configs exist
       ansible.builtin.assert:
-        that: urxvt_cfg.stat.exists
-        fail_msg: "~/.urxvt/xresources not found"
+        that: item.stat.exists
+        fail_msg: "{{ item.item }} not found in ~/.urxvt/"
+      loop: "{{ urxvt_configs.results }}"
+
+    - name: Check font-size plugin
+      ansible.builtin.stat:
+        path: ~/.urxvt/ext/font-size
+      register: font_size_plugin
+
+    - name: Assert font-size plugin installed
+      ansible.builtin.assert:
+        that: font_size_plugin.stat.exists
+        fail_msg: "~/.urxvt/ext/font-size not found"
