@@ -21,16 +21,18 @@ Installs and configures [rxvt-unicode (urxvt)](http://software.schmorp.de/pkg/rx
 - `tasks/archlinux.yml` — installs via `community.general.pacman`
 - `tasks/debian.yml` — updates apt cache, installs via `apt`
 
-## Testing Commands
+## Testing
 
 ```bash
-# Lint
 yamllint .
-
-# Full molecule test (Arch container)
+ansible-lint
 molecule test
-
-# Iterative
 molecule converge
 molecule destroy
 ```
+
+## CI
+
+- **Lint**: yamllint + ansible-lint
+- **Molecule**: Ubuntu 24.04 + Arch Linux via Docker
+- **Release**: publishes to Ansible Galaxy on merge to `main`
