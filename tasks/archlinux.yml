@@ -1,5 +1,5 @@
 ---
-- name: Install urxvt
+- name: Install urxvt (Arch Linux)
   become: true
   community.general.pacman:
     name:
@@ -9,3 +9,19 @@
       - xsel
     state: present
     update_cache: true
+
+- name: Enable urxvt keyboard-select plugin
+  become: false
+  ansible.builtin.file:
+    src: /usr/lib/urxvt/perl/keyboard-select
+    dest: "~/.urxvt/ext/keyboard-select"
+    state: link
+  tags: ['urxvt']
+
+- name: Enable urxvt url-select plugin
+  become: false
+  ansible.builtin.file:
+    src: /usr/lib/urxvt/perl/url-select
+    dest: "~/.urxvt/ext/url-select"
+    state: link
+  tags: ['urxvt']
