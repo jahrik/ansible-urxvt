@@ -36,3 +36,35 @@
     dest: "~/.urxvt/ext/font-size"
     mode: '0644'
   tags: ['urxvt']
+
+- name: Check urxvt keyboard-select plugin path
+  ansible.builtin.stat:
+    path: /usr/lib/urxvt/perl/keyboard-select
+  register: keyboard_select_stat
+  when: ansible_os_family == 'Archlinux'
+  tags: ['urxvt']
+
+- name: Enable urxvt keyboard-select plugin
+  become: false
+  ansible.builtin.file:
+    src: /usr/lib/urxvt/perl/keyboard-select
+    dest: "~/.urxvt/ext/keyboard-select"
+    state: link
+  when: ansible_os_family == 'Archlinux' and keyboard_select_stat.stat.exists
+  tags: ['urxvt']
+
+- name: Check urxvt url-select plugin path
+  ansible.builtin.stat:
+    path: /usr/lib/urxvt/perl/url-select
+  register: url_select_stat
+  when: ansible_os_family == 'Archlinux'
+  tags: ['urxvt']
+
+- name: Enable urxvt url-select plugin
+  become: false
+  ansible.builtin.file:
+    src: /usr/lib/urxvt/perl/url-select
+    dest: "~/.urxvt/ext/url-select"
+    state: link
+  when: ansible_os_family == 'Archlinux' and url_select_stat.stat.exists
+  tags: ['urxvt']
