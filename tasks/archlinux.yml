@@ -1,5 +1,5 @@
 ---
-- name: Install urxvt
+- name: Install urxvt (Arch Linux)
   become: true
   community.general.pacman:
     name:
