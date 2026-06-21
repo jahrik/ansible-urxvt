@@ -24,6 +24,8 @@ Installs and configures [rxvt-unicode (urxvt)](http://software.schmorp.de/pkg/rx
 ## Testing
 
 ```bash
+uv sync
+source .venv/bin/activate
 yamllint .
 ansible-lint
 molecule test
