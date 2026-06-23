@@ -13,6 +13,17 @@
         that: urxvt_bin.stat.exists
         fail_msg: "urxvt binary not found at /usr/bin/urxvt"
 
+    - name: Run urxvt -help
+      ansible.builtin.command: urxvt -help
+      register: urxvt_version
+      changed_when: false
+      failed_when: false
+
+    - name: Assert urxvt version output
+      ansible.builtin.assert:
+        that: "'rxvt' in urxvt_version.stdout | lower or 'rxvt' in urxvt_version.stderr | lower"
+        fail_msg: "urxvt help output did not contain 'rxvt'"
+
     - name: Check ~/.urxvt/ext directory
       ansible.builtin.stat:
         path: ~/.urxvt/ext

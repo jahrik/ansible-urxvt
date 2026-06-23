@@ -1,4 +1,10 @@
 ---
+- name: Update pacman cache (Arch Linux)
+  become: true
+  community.general.pacman:
+    update_cache: true
+  changed_when: false
+
 - name: Install urxvt (Arch Linux)
   become: true
   community.general.pacman:
@@ -8,4 +14,3 @@
       - ttf-dejavu
       - xsel
     state: present
-    update_cache: true

@@ -17,7 +17,9 @@ Installs and configures [rxvt-unicode (urxvt)](http://software.schmorp.de/pkg/rx
 
 ## Task Flow
 
-- `tasks/main.yml` — includes OS-specific tasks, creates `~/.urxvt/ext/`, templates config files, downloads font-size plugin, symlinks keyboard-select/url-select (Arch only)
+- `tasks/main.yml` — includes `install.yml` or `uninstall.yml` based on the `install` variable
+- `tasks/install.yml` — includes OS-specific tasks, creates `~/.urxvt/ext/`, templates config files, downloads font-size plugin, symlinks keyboard-select/url-select (Arch only)
+- `tasks/uninstall.yml` — removes urxvt configuration, plugins, and uninstall packages
 - `tasks/archlinux.yml` — installs via `community.general.pacman`
 - `tasks/debian.yml` — updates apt cache, installs via `apt`
 
@@ -29,8 +31,6 @@ source .venv/bin/activate
 yamllint .
 ansible-lint
 molecule test
-molecule converge
-molecule destroy
 ```
 
 ## CI
