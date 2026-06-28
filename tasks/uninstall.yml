@@ -6,7 +6,7 @@
       - rxvt-unicode
       - urxvt-perls
     state: absent
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts['os_family'] == 'Archlinux'
 
 - name: Uninstall urxvt (Debian)
   become: true
@@ -14,7 +14,7 @@
     name:
       - rxvt-unicode
     state: absent
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts['os_family'] == 'Debian'
 
 - name: Remove ~/.urxvt directory
   become: false
