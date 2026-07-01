@@ -1,0 +1,28 @@
+---
+argument_specs:
+  main:
+    short_description: Install and configure urxvt
+    options:
+      install:
+        type: bool
+        default: true
+        description: Set to false to uninstall urxvt and remove its config
+      browser:
+        type: str
+        default: chromium
+        description: Browser launched by the urxvt url-select plugin
+      text:
+        type: dict
+        description: Font settings rendered into the generated xresources config
+        default:
+          font: DejaVuSansMono Nerd Font
+          size: 18
+        options:
+          font:
+            type: str
+            default: DejaVuSansMono Nerd Font
+            description: Font family in the generated config
+          size:
+            type: int
+            default: 18
+            description: Font size in the generated config
