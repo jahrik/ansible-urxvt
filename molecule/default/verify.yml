@@ -49,3 +49,33 @@
       ansible.builtin.assert:
         that: font_size_plugin.stat.exists
         fail_msg: "~/.urxvt/ext/font-size not found"
+
+- name: Verify uninstall
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Run jahrik.urxvt with install false
+      ansible.builtin.include_role:
+        name: jahrik.urxvt
+      vars:
+        install: false
+
+    - name: Check urxvt binary removed
+      ansible.builtin.stat:
+        path: /usr/bin/urxvt
+      register: urxvt_bin_removed
+
+    - name: Assert urxvt binary is removed
+      ansible.builtin.assert:
+        that: not urxvt_bin_removed.stat.exists
+        fail_msg: "urxvt binary still present at /usr/bin/urxvt after uninstall"
+
+    - name: Check ~/.urxvt directory removed
+      ansible.builtin.stat:
+        path: ~/.urxvt/
+      register: urxvt_config_removed
+
+    - name: Assert ~/.urxvt directory is removed
+      ansible.builtin.assert:
+        that: not urxvt_config_removed.stat.exists
+        fail_msg: "~/.urxvt/ still present after uninstall"

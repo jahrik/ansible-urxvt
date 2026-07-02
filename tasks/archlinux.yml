@@ -7,5 +7,4 @@
       - urxvt-perls
       - ttf-dejavu
       - xsel
-    state: present
     update_cache: true

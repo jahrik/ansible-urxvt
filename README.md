@@ -41,6 +41,21 @@ To uninstall:
     - role: jahrik.urxvt
 ```
 
+## Tags
+
+Run or skip parts of the role with tags:
+
+```bash
+ansible-playbook playbook.yml --tags urxvt:install
+ansible-playbook playbook.yml --skip-tags urxvt:uninstall
+```
+
+| Tag | Scope |
+|---|---|
+| `urxvt` | All role tasks |
+| `urxvt:install` | Install path only |
+| `urxvt:uninstall` | Uninstall path only |
+
 ## Testing
 
 ```bash
